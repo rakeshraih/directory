@@ -1,0 +1,10 @@
+.pagination {
+  justify-content: space-between;
+  display: flex;
+
+  button {
+    padding: 0 50px;
+    font-size: 28px;
+    background: #ccc;
+  }
+}
