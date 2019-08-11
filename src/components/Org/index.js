@@ -1,10 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import Accordion from 'react-bootstrap/Accordion';
-import Card from 'react-bootstrap/Card';
-import Button from 'react-bootstrap/Button';
+import { Accordion, Button, Card, Col } from 'react-bootstrap';
 
-import Col from 'react-bootstrap/Col';
 import Box from './Box';
 import './Org.scss';
 

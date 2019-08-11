@@ -1,12 +1,11 @@
 import React, { useState } from 'react';
-import Button from 'react-bootstrap/Button';
+import { Button } from 'react-bootstrap';
 
 import './Org.scss';
 
 export default function({ setType, addTrigger, setaddTrigger, user, setBossDetails, hide, showPeerSet = true }) {
   const [showBoss, setShowBoss] = useState(true);
   const [showPeer, setshowPeer] = useState(showPeerSet);
-  const [boxList, setBoxList] = useState([]);
 
   return (
     <div className={`user-card ${hide ? 'hide' : ''} ${showPeer ? 'showPeer' : ''}`}>
