@@ -1,0 +1,54 @@
+.box-container {
+  width: 100%;
+  margin: 0px;
+  overflow: scroll;
+  height: 600px;
+  border: 1px solid #ccc;
+  overflow-x: scroll;
+  overflow-y: hidden;
+  display: flex;
+
+  .card-holder {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-direction: column;
+    max-height: 550px;
+    flex-wrap: wrap;
+    width: 100%;
+    border-right: 1px solid #ccc;
+    min-height: 550px;
+    margin-top: 25px;
+
+    .user-card {
+      height: 100px;
+      width: 100px;
+      background-color: #fff;
+      padding: 0 10px;
+      margin: 10px;
+      border: 1px solid #000;
+      border-radius: 5px;
+      text-align: center;
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+      &.hide {
+        // flex-direction: initial;
+        button {
+          visibility: hidden !important;
+        }
+
+        &.showPeer {
+          button:nth-child(3) {
+            visibility: visible !important;
+          }
+        }
+      }
+      .btn-primary {
+        margin-top: -20px;
+        padding: 2px;
+        margin-bottom: 10px;
+      }
+    }
+  }
+}
