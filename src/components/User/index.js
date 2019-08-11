@@ -9,8 +9,23 @@ import Container from 'react-bootstrap/Container';
 
 import './User.scss';
 
+const formatData = (data, fetchNewUser) =>
+  data.map((val, index) => (
+    <Button
+      variant="link"
+      onClickCapture={() => {
+        fetchNewUser(val);
+      }}
+      key={index}
+    >
+      {val.first} {val.last}
+    </Button>
+  ));
+
 export default function({ first, last, id, manager, department, fetchNewUser }) {
   const [managerDetails, setmanagerDetails] = useState(0);
+  const [reportees, setReportees] = useState([]);
+  const [peers, setPeers] = useState([]);
 
   useEffect(() => {
     const fetchManager = async manager => {
@@ -21,8 +36,24 @@ export default function({ first, last, id, manager, department, fetchNewUser }) 
       }
     };
 
+    const fetchReportees = async (id, peer) => {
+      if (id) {
+        const response = await axios.get(`/EmployeesChart-Api?manager=${id}`);
+        if (peer) {
+          setReportees(response.data);
+        } else {
+          setPeers(response.data);
+        }
+      }
+    };
+
     fetchManager(manager);
-  }, [manager]);
+    fetchReportees(id);
+    fetchReportees(manager, true);
+  }, [manager, id]);
+
+  const dataList = formatData(reportees, fetchNewUser);
+  const peerList = formatData(peers, fetchNewUser);
 
   return id ? (
     <Jumbotron className="user-class">
@@ -36,7 +67,7 @@ export default function({ first, last, id, manager, department, fetchNewUser }) 
             </Row>
             {manager <= 0 && (
               <Row>
-                <h2>CEO</h2>
+                <h2>Head</h2>
               </Row>
             )}
             <Row>
@@ -65,21 +96,40 @@ export default function({ first, last, id, manager, department, fetchNewUser }) 
             <Row>
               Department <h3>{department}</h3>
             </Row>
+          </Col>
 
-            <Row>
-              <Button
-                variant="primary"
-                onClick={() => {
-                  fetchNewUser({});
-                }}
-              >
-                Close
-              </Button>
+          <Col className="peer-list">
+            <Row style={{ display: 'flex' }}>
+              {dataList.length ? (
+                <Col>
+                  <h6>{managerDetails.first ? managerDetails.first : first}'s Reportees</h6>
+                  <Row>{dataList}</Row>
+                </Col>
+              ) : (
+                ''
+              )}
+              {peerList.length && manager !== 0 ? (
+                <Col>
+                  <h6>{first}'s Peers</h6>
+                  <Row>{peerList}</Row>
+                </Col>
+              ) : (
+                ''
+              )}
             </Row>
           </Col>
-          <Col>hi</Col>
         </Row>
       </Container>
+      <Row style={{ float: 'right' }}>
+        <Button
+          variant="primary"
+          onClick={() => {
+            fetchNewUser({});
+          }}
+        >
+          Close
+        </Button>
+      </Row>
     </Jumbotron>
   ) : (
     <div />
