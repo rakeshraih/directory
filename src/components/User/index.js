@@ -94,7 +94,7 @@ export default function({ first, last, id, manager, department, fetchNewUser }) 
               ''
             )}
             <Row>
-              Department <h3>{department}</h3>
+              Department <h3>{department ? department : '-'}</h3>
             </Row>
           </Col>
 

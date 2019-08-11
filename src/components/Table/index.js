@@ -37,14 +37,15 @@ export default function({ showDetail }) {
   }, [offset, limit]);
 
   const dataList = (filteredData ? filteredData : data).map((val, index) => (
-    <tr key={offset + index}>
+    <tr key={offset + index} onClickCapture={() => showDetail(val)}>
       <td>{offset + index + 1}</td>
-      <td>{val.first}</td>
-      <td>{val.last}</td>
       <td>
-        <Button onClickCapture={() => showDetail(val)} variant="link">
-          {val.id}
+        <Button variant="link">
+          {val.first} {val.last}
         </Button>
+      </td>
+      <td>
+        <Button variant="link">{val.id}</Button>
       </td>
     </tr>
   ));
@@ -67,8 +68,7 @@ export default function({ showDetail }) {
         <thead>
           <tr>
             <th />
-            <th>First Name</th>
-            <th>Last Name</th>
+            <th>Name</th>
             <th>Employee Id</th>
           </tr>
         </thead>
