@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import Accordion from 'react-bootstrap/Accordion';
+import Card from 'react-bootstrap/Card';
+import Button from 'react-bootstrap/Button';
 
 import Col from 'react-bootstrap/Col';
 import Box from './Box';
@@ -70,5 +73,20 @@ export default function({ user }) {
     );
   }
 
-  return <div className="box-container">{orgList}</div>;
+  return (
+    <Accordion defaultActiveKey="1">
+      <Card>
+        <Card.Header>
+          <Accordion.Toggle as={Button} variant="link" eventKey="0">
+            Org Chart
+          </Accordion.Toggle>
+        </Card.Header>
+        <Accordion.Collapse eventKey="0">
+          <Card.Body>
+            <div className="box-container">{orgList}</div>
+          </Card.Body>
+        </Accordion.Collapse>
+      </Card>
+    </Accordion>
+  );
 }
