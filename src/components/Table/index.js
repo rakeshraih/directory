@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Table, Button, Form, Col } from 'react-bootstrap';
+import Constant from '../../Constant';
 
 import './Table.scss';
 
@@ -25,7 +26,7 @@ export default function({ showDetail }) {
 
   useEffect(() => {
     const getEmployees = async manager => {
-      const response = await axios.get(`/EmployeesChart-Api?limit=${limit}&offset=${offset}`);
+      const response = await axios.get(`${Constant.API}/EmployeesChart-Api?limit=${limit}&offset=${offset}`);
       const data = response.data;
       setData(data);
     };
