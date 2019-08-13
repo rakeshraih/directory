@@ -21,7 +21,6 @@ const Box = function({ id, peer, boss }) {
     };
     getUser();
   }, [id]);
-  console.log(user);
   return user ? (
     <div className="wholebox">
       {bossClicked && (
