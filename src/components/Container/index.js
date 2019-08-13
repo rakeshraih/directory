@@ -1,15 +1,14 @@
 import React, { useState } from 'react';
 import Table from '../../components/Table';
 import User from '../../components/User';
-import Org from '../../components/Org';
+import OrgNew from '../../components/OrgStatic';
 
 export default function() {
   const [user, fetchNewUser] = useState(0);
-
   return (
     <div>
       <User {...user} fetchNewUser={fetchNewUser} />
-      {user.first && <Org {...{ user }} />}
+      {user.first && <OrgNew {...{ id: user.id }} />}
       <Table
         showDetail={val => {
           fetchNewUser(val);

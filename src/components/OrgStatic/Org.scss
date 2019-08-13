@@ -1,0 +1,74 @@
+.box-container {
+  &.top {
+    margin: 50px 0;
+  }
+  justify-content: center;
+  max-width: 100%;
+  &.peer {
+    justify-content: space-around;
+    border-top: 2px solid #ccc;
+  }
+  .user-card {
+    height: 100px;
+    width: min-content;
+    background-color: #28a745;
+    padding: 0 10px;
+    margin: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    text-align: center;
+    align-items: center;
+    max-width: min-content;
+    min-width: 100px;
+    color: #fff;
+    &.manager {
+      background: #ffc107;
+    }
+    &.head {
+      background: #007bff;
+    }
+    &.selected {
+      background: #ccc;
+    }
+    button {
+      padding: 0px;
+      margin-top: -25px;
+      font-size: 25px;
+      &:disabled {
+        &::after {
+          content: '|';
+          position: absolute;
+          margin-top: -2px;
+          font-size: 15px;
+          margin-left: -13px;
+          color: red;
+        }
+        &.peer::after {
+          margin-top: 20px;
+        }
+        &.no-peers::after,
+        &.head::after {
+          content: '';
+        }
+        i {
+          visibility: hidden;
+        }
+      }
+    }
+  }
+}
+
+.user-card + .box-container.peer {
+  display: flex;
+}
+
+.wholebox > .user-card {
+  margin-left: 50%;
+  transform: translateX(-50%);
+}
+
+button.color-code {
+  cursor: default;
+  margin-right: 10px;
+  opacity: 1 !important;
+}

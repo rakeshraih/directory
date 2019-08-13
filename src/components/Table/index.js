@@ -32,20 +32,22 @@ export default function({ showDetail }) {
 
     getEmployees();
   }, [offset, limit]);
-
-  const dataList = (filteredData ? filteredData : data).map((val, index) => (
-    <tr key={offset + index} onClickCapture={() => showDetail(val)}>
-      <td>{offset + index + 1}</td>
-      <td>
-        <Button variant="link">
-          {val.first} {val.last}
-        </Button>
-      </td>
-      <td>
-        <Button variant="link">{val.id}</Button>
-      </td>
-    </tr>
-  ));
+  let dataList = [];
+  if (Array.isArray(data)) {
+    dataList = (filteredData ? filteredData : data || []).map((val, index) => (
+      <tr key={offset + index} onClickCapture={() => showDetail(val)}>
+        <td>{offset + index + 1}</td>
+        <td>
+          <Button variant="link">
+            {val.first} {val.last}
+          </Button>
+        </td>
+        <td>
+          <Button variant="link">{val.id}</Button>
+        </td>
+      </tr>
+    ));
+  }
 
   return (
     <div>
