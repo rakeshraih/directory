@@ -1,5 +1,8 @@
 #directory
 
-yarn install and then yarn start, to start the app. Go to http://localhost:3000/
+yarn install
+yarn start 
+
+If no errors then go to http://localhost:3000/
 
 
