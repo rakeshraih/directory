@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import axios from '../../uitlity';
 import { Button, Jumbotron, Row, Col } from 'react-bootstrap';
-import Constant from '../../Constant';
 import Container from 'react-bootstrap/Container';
 
 import './User.scss';
@@ -27,7 +26,7 @@ export default function({ first, last, id, manager, department, fetchNewUser }) 
   useEffect(() => {
     const fetchManager = async manager => {
       if (manager) {
-        const response = await axios.get(`${Constant.API}/EmployeesChart-Api?id=${manager}`);
+        const response = await axios.getEmployee(manager);
         const data = response.data[0];
         setmanagerDetails({ ...data });
       }
@@ -35,7 +34,7 @@ export default function({ first, last, id, manager, department, fetchNewUser }) 
 
     const fetchReportees = async (id, peer) => {
       if (id) {
-        const response = await axios.get(`${Constant.API}/EmployeesChart-Api?manager=${id}`);
+        const response = await axios.getEmployee(id);
         if (peer) {
           setReportees(response.data);
         } else {
