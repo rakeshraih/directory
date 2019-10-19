@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
 import { Button } from 'react-bootstrap';
-import axios from 'axios';
-import Constant from '../../Constant';
+import axios from '../../uitlity';
 
 import './Org.scss';
 
@@ -14,8 +13,8 @@ const Box = function({ id, peer, boss }) {
 
   useEffect(() => {
     const getUser = async () => {
-      const user = (await axios.get(`${Constant.API}/EmployeesChart-Api?id=${id}`)).data[0];
-      const reportees = id ? (await axios.get(`${Constant.API}/EmployeesChart-Api?manager=${id}`)).data : [];
+      const user = (await axios.getEmployee(id)).data[0];
+      const reportees = id ? (await axios.getReportees(id)).data : [];
       setUser(user);
       setreportees(reportees);
     };

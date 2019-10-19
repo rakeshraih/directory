@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import axios from '../../uitlity';
 import { Table, Button, Form, Col } from 'react-bootstrap';
-import Constant from '../../Constant';
 
 import './Table.scss';
 
@@ -26,7 +25,7 @@ export default function({ showDetail }) {
 
   useEffect(() => {
     const getEmployees = async manager => {
-      const response = await axios.get(`${Constant.API}/EmployeesChart-Api?limit=${limit}&offset=${offset}`);
+      const response = await axios.get(limit, offset);
       const data = response.data;
       setData(data);
     };
@@ -85,7 +84,7 @@ export default function({ showDetail }) {
           <span>{'<'}</span>
         </Button>
         <div>
-          Page {offset / limit + 1 || 1} -{' '}
+          Page {Math.ceil(offset / limit) + 1 || 1} -{' '}
           <select
             onChange={event => {
               setLimit(parseInt(event.target.value, 10));
