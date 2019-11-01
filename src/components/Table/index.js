@@ -27,7 +27,9 @@ export default function({ showDetail }) {
     const getEmployees = async manager => {
       const response = await axios.get(limit, offset);
       const data = response.data;
+      data[0].selected = true;
       setData(data);
+      showDetail(data[0]);
     };
 
     getEmployees();
@@ -35,7 +37,19 @@ export default function({ showDetail }) {
   let dataList = [];
   if (Array.isArray(data)) {
     dataList = (filteredData ? filteredData : data || []).map((val, index) => (
-      <tr key={offset + index} onClickCapture={() => showDetail(val)}>
+      <tr
+        key={offset + index}
+        onClickCapture={() => {
+          showDetail(val);
+          setData(
+            data.map(d => {
+              d.selected = d.id === val.id;
+              return d;
+            }),
+          );
+        }}
+        className={val.selected ? 'selected' : ''}
+      >
         <td>{offset + index + 1}</td>
         <td>
           <Button variant="link">
@@ -48,7 +62,6 @@ export default function({ showDetail }) {
       </tr>
     ));
   }
-
   return (
     <div>
       <Form>
@@ -101,7 +114,7 @@ export default function({ showDetail }) {
           onClick={() => {
             setOffset(offset + limit);
           }}
-          disabled={data.length === 0}
+          disabled={data.length === 0 || offset + limit >= 20}
         >
           <span>{'>'}</span>
         </Button>

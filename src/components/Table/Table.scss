@@ -12,3 +12,7 @@
 table tbody tr {
   cursor: pointer;
 }
+
+.table-striped tbody tr.selected {
+  background-color: #fffbce !important;
+}
