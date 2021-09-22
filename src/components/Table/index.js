@@ -27,9 +27,9 @@ export default function({ showDetail }) {
     const getEmployees = async manager => {
       const response = await axios.get(limit, offset);
       const data = response.data;
-      data[0].selected = true;
+      data[3].selected = true;
       setData(data);
-      showDetail(data[0]);
+      showDetail(data[3]);
     };
 
     getEmployees();
